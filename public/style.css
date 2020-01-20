@@ -1,0 +1,14 @@
+body {
+  width: 920px;
+  min-height: 100%;
+  margin: 0 auto;
+}
+
+.container {
+  min-height: 20px;
+  background: gray;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: wrap;
+}
+
