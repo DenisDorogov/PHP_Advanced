@@ -1,19 +1,23 @@
 <?php
 namespace app\models;
 use app\models\Products;
-echo "<br> File Cart <br>";
-class Cart extends Model {
+
+class Cart {
   public $user;
   public $address;
-  public $Products = [];
+  public $products = [];
   public $totalPrice;
+  public $countGoods;
   
   public function __construct($user) {
     $this->user = $user;
-    echo 'Hello new user!!!'
   }
   
-  public function addInCart($id) {
-    $this->products[] = (new Products($id));
+  public function addInCart($product) { 
+    $this->products[] = $product->name; 
+  }
+  public function countGoods() {
+        return $this->countGoods = count($this->products);
+        
   }
 }

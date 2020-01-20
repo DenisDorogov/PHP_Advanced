@@ -9,8 +9,8 @@ class Autoload {
         $fileName = "../{$className}.php";
         if (file_exists($fileName)) {
           include $fileName;
-          echo("<br>Подключен класс {$className}<br>");
-          echo $fileName . '<br>';
+//          echo("<br>Подключен класс {$className}<br>");
+//          echo $fileName . '<br>';
         }
 	}
 }

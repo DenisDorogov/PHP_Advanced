@@ -9,6 +9,7 @@ class Products extends Model {
 	public $price;
     
     public $tableName = 'products';
+    
   
     
 }

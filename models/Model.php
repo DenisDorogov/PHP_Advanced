@@ -6,15 +6,13 @@ use app\engine\Db;
 abstract class Model /*implements IModel*/ {
   
   public $tableName = '';
-  protected $db;
+  public $db;
     
     public function __construct(Db $db) {
       $this->db = $db;
-      
   }
     public function getOne($id) {
       $sql = "SELECT * FROM {$this->tableName} WHERE id = {$id}";
-      echo '<br/>';
       return $this->db->queryOne($sql);
     }
   
