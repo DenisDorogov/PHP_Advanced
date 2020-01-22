@@ -1,15 +1,19 @@
 <?php
+
 namespace app\engine;
 
-class Autoload {
-    
-	public function loadClass($className) {
-        $className = str_replace(['\\', 'app/'], ['/', ''], $className);
-        $fileName = "../{$className}.php";
+class Autoload
+{
+    public function loadClass($className)
+    {
+        // $fileName = (str_replace(['app', '\\'], [ROOT_DIR, DS], $className) . ".php");
+        $fileName = realpath(str_replace(['app', '\\'], ['..', DS], $className) . ".php");
+
         if (file_exists($fileName)) {
-          include $fileName;
-//          echo("<br>Подключен класс {$className}<br>");
-//          echo $fileName . '<br>';
+            include $fileName;
+
         }
-	}
+
+
+    }
 }
