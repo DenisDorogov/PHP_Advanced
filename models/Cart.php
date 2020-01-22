@@ -8,6 +8,7 @@ class Cart {
   public $products = [];
   public $totalPrice;
   public $countGoods;
+  public $tableName = 'cart';
   
   public function __construct($user) {
     $this->user = $user;

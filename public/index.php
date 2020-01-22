@@ -9,8 +9,9 @@ use app\engine\{Autoload, Db};
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-$product = new Products(new Db());
-$user = new Users(new Db());
+$db = new Db();
+$product = new Products($db);
+$user = new Users($db);
 
 $user->login = $user->getOne(5);
 $cart = new Cart($user);

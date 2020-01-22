@@ -1,9 +1,11 @@
 <?php
 namespace app\models;
 use app\engine\Db;
+use app\interfaces\IModel;
 
 
-abstract class Model /*implements IModel*/ {
+
+abstract class Model implements IModel {
   
   public $tableName = '';
   public $db;
@@ -18,7 +20,6 @@ abstract class Model /*implements IModel*/ {
   
     public function getAll() {
       $sql = "SELECT * FROM {$this->tableName}";
-      echo '<br/>';
       return $this->db->queryAll($sql);
     }
 }
