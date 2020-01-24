@@ -18,7 +18,7 @@ $product = new Products("Кофе", "Крепкий", 12);
 
 $product->insert();
 
-$product->deleteOne(5);
+// $product->deleteOne(5);
 
 // var_dump($product);
 
