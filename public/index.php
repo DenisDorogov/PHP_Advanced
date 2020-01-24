@@ -9,13 +9,16 @@ spl_autoload_register([new Autoload(), 'loadClass']);
 
 
 $product = new Products("Кофе", "Крепкий", 12);
-$product->insert();
+
 //$product->delete();
-//var_dump($product);
+// var_dump($product->config);
 
-var_dump($product->getOne(1));
+// var_dump($product->getOne(2));
+// echo $product->getOne(3)['name'];
 
-//var_dump($product->getAll());
+$product->insert();
+
+// var_dump($product);
 
 //echo $product->getAll();
 

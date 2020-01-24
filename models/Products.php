@@ -8,6 +8,7 @@ class Products extends Model {
     public $description;
     public $price;
 
+    
     public function __construct($name = null, $description = null, $price = null)
     {
         parent::__construct();

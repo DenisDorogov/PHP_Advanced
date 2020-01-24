@@ -8,7 +8,7 @@ class Db
 {
     private $config = [
         'driver' => 'mysql',
-        'host' => 'localhost',
+        'host' => 'localhost:3307',
         'login' => 'root',
         'password' => '',
         'database' => 'shop',
@@ -21,12 +21,13 @@ class Db
 
     private function getConnection() {
         if (is_null($this->connection)) {
-            var_dump("Подключаюсь К БД");
+            echo "Подключаюсь К БД <br>";
+            
             $this->connection = new \PDO(
                 $this->prepareDSNString(),
                 $this->config['login'],
                 $this->config['password']
-            );
+                );
             $this->connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         }
         return $this->connection;
@@ -40,10 +41,11 @@ class Db
         );
     }
 
-//"SELECT * FROM products WHERE id = :id;", ["id" => 1]
+//"SELECT * FROM products WHERE id = :id;", ["id" => 1] //Placeholder :id
     private function query($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params);
+        var_dump($pdoStatement);
         return $pdoStatement;
     }
 
@@ -57,10 +59,10 @@ class Db
     }
 
     public function queryAll($sql, $params = []) {
-        return $this->query($sql, $params)->fetchAll();
+        return $this->query($sql, $params)->fetchAll(); 
     }
 
-    public function __toString()
+    public function __toString()//Позволяет вывести экземпляр класса с помощью echo
     {
         return "Db";
     }

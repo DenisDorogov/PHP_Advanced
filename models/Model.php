@@ -14,7 +14,6 @@ abstract class Model implements IModel
         $this->db = Db::getInstance();
     }
 
-
     public function getOne($id)
     {
         $sql = "SELECT * FROM {$this->getTableName()} WHERE id = :id";
@@ -30,11 +29,11 @@ abstract class Model implements IModel
     public function insert() {
         foreach ($this as $key=>$value) {
             //TODO исключить id и db при формировании строки запроса
-            echo $key . " " . $value . "<br>";
+            // echo $key . " " . $value . "<br>";
         }
         //TODO собрать валидный запрос к БД по $key и $value и выполнить его
         $sql = "INSERT INTO `{$this->getTableName()}`() VALUES ()";
-        var_dump($sql);
+        // var_dump($sql);
         //TODO и в поле id сохранить новый id (lastInsertId) $this->id = lastinsertId
     }
 
