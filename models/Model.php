@@ -8,6 +8,7 @@ use app\interfaces\IModel;
 abstract class Model implements IModel
 {
     protected $db;
+    
 
     public function __construct()
     {
@@ -28,13 +29,28 @@ abstract class Model implements IModel
 
     public function insert() {
         foreach ($this as $key=>$value) {
-            //TODO исключить id и db при формировании строки запроса
-            // echo $key . " " . $value . "<br>";
+            if ($key !== 'id' and $key !== 'db') {
+                $keys[] = $key; 
+                $values[] = $value; 
+            }
         }
         //TODO собрать валидный запрос к БД по $key и $value и выполнить его
-        $sql = "INSERT INTO `{$this->getTableName()}`() VALUES ()";
-        // var_dump($sql);
+        
+        $params['keysParam'] = implode(', ',$keys);
+        $params['valuesParam'] = implode(', ',$values);
+        echo "<br>Params - ";
+        var_dump($params);
+        $sql = "INSERT INTO `{$this->getTableName()}` (:keysParam) VALUES (:valuesParam)";
+        return $this->db->queryOne($sql, $params);
         //TODO и в поле id сохранить новый id (lastInsertId) $this->id = lastinsertId
+        //SELECT MAX(`id`) FROM `members` - запрос последнего id
+    }
+    
+    public function deleteOne($id) {
+        
+        $sql = "DELETE FROM `{$this->getTableName()}` WHERE id = :id";
+        $this->id = $lastinsertId;
+        return $this->db->queryOne($sql, ['id' => $id]);
     }
 
     abstract public function getTableName();

@@ -44,12 +44,15 @@ class Db
 //"SELECT * FROM products WHERE id = :id;", ["id" => 1] //Placeholder :id
     private function query($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
+        // $pdoStatement->bindParam($params);
+
         $pdoStatement->execute($params);
-        var_dump($pdoStatement);
+        // echo '   pdoStatement   ';
+        // var_dump($pdoStatement);
         return $pdoStatement;
     }
 
-    private function execute($sql, $params) {
+    private function execute($sql, $params = []) {
         $this->query($sql, $params);
         return true;
     }
