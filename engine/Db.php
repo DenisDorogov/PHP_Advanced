@@ -8,7 +8,7 @@ class Db
 {
     private $config = [
         'driver' => 'mysql',
-        'host' => 'localhost:3307',
+        'host' => 'localhost',
         'login' => 'root',
         'password' => '',
         'database' => 'shop',
@@ -21,13 +21,12 @@ class Db
 
     private function getConnection() {
         if (is_null($this->connection)) {
-            echo "Подключаюсь К БД <br>";
-            
+
             $this->connection = new \PDO(
                 $this->prepareDSNString(),
                 $this->config['login'],
                 $this->config['password']
-                );
+            );
             $this->connection->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         }
         return $this->connection;
@@ -41,22 +40,27 @@ class Db
         );
     }
 
-//"SELECT * FROM products WHERE id = :id;", ["id" => 1] //Placeholder :id
+//"SELECT * FROM products WHERE id = :id;", ["id" => 1]
     private function query($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
-        // $pdoStatement->bindParam($params);
-        echo " sql = {$sql} <br>";
-        var_dump($params);
-
-
         $pdoStatement->execute($params);
-        // echo '   pdoStatement   ';
-        echo "<p>pdoStatement:</p>";
-         var_dump($pdoStatement);
         return $pdoStatement;
     }
 
-    public function execute($sql, $params = []) {
+    public function lastInsertId() {
+        return $this->connection->lastInsertId();
+        //lastInsertId() возвращает id последней вставленной записи.
+    }
+    //Кастомный query , возвращающий объект.
+    public function queryObject($sql, $params, $class) {
+        $pdoStatement = $this->query($sql, $params);
+        $pdoStatement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
+    //setFetchMode — Устанавливает режим выборки по умолчанию для объекта запроса
+        return $pdoStatement->fetch();
+      //Возвращаем  класс
+    }
+
+    public function execute($sql, $params) {
         $this->query($sql, $params);
         return true;
     }
@@ -66,10 +70,10 @@ class Db
     }
 
     public function queryAll($sql, $params = []) {
-        return $this->query($sql, $params)->fetchAll(); 
+        return $this->query($sql, $params)->fetchAll();
     }
 
-    public function __toString()//Позволяет вывести экземпляр класса с помощью echo
+    public function __toString()
     {
         return "Db";
     }
