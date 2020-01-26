@@ -30,15 +30,26 @@ abstract class Model implements IModel
     public function insert() {
         foreach ($this as $key=>$value) {
             if ($key !== 'id' and $key !== 'db') {
-                $keys[] = $key; 
-                $values[] = $value; 
+//                $keys[] = $key;
+//                $values[] = $value;
+                $params[":{$key}"] = $value;
+                $columns[] = "$key";
+
             }
         }
+        $columns = implode(", ", $columns);
+        $values = implode(", ", array_keys($params));
+        echo "<br> Columns: ";
+        var_dump($columns);
+        echo "<br> Values: ";
+
+        var_dump($values);
+
         //TODO собрать валидный запрос к БД по $key и $value и выполнить его
         
-        $params[':keysParam'] = implode(', ',$keys);
-        $params[':valuesParam'] = implode(', ',$values);
-        $sql = "INSERT INTO {$this->getTableName()} (:keysParam) VALUES (:valuesParam)";
+//        $params[':keysParam'] = implode(', ',$keys);
+//        $params[':valuesParam'] = implode(', ',$values);
+        $sql = "INSERT INTO {$this->getTableName()} ($columns) VALUES ($values)";
         return $this->db->queryOne($sql, $params);
         //TODO и в поле id сохранить новый id (lastInsertId) $this->id = lastinsertId
         //SELECT MAX(`id`) FROM `members` - запрос последнего id

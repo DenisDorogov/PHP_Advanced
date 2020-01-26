@@ -48,6 +48,7 @@ class Db
         echo " sql = {$sql} <br>";
         var_dump($params);
 
+
         $pdoStatement->execute($params);
         // echo '   pdoStatement   ';
         echo "<p>pdoStatement:</p>";
