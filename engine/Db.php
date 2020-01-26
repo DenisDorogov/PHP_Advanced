@@ -45,14 +45,17 @@ class Db
     private function query($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
         // $pdoStatement->bindParam($params);
+        echo " sql = {$sql} <br>";
+        var_dump($params);
 
         $pdoStatement->execute($params);
         // echo '   pdoStatement   ';
-        // var_dump($pdoStatement);
+        echo "<p>pdoStatement:</p>";
+         var_dump($pdoStatement);
         return $pdoStatement;
     }
 
-    private function execute($sql, $params = []) {
+    public function execute($sql, $params = []) {
         $this->query($sql, $params);
         return true;
     }

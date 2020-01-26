@@ -7,7 +7,7 @@ class Products extends Model {
     public $name;
     public $description;
     public $price;
-    public $lastInsertId;
+//    public $lastInsertId;
 
 
     public function __construct($name = null, $description = null, $price = null)
