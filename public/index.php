@@ -32,8 +32,24 @@ if (class_exists($controllerClass)) {
 //var_dump($product);
 
 
-//$product = Products::getOne(4);
-//$product->price = 123; //Как перехватить это присваивание?
+$product = Products::getOne(4);
+//echo('<br>price ');
+//echo $product->price;
+$product->price = 11222; //Как перехватить это присваивание?
+$product->description = 'Шоколадный';
+debug($product, '$product');
+
+//$product->name = 'Mars';
+
+//echo('<br>price ');
+//echo $product->price;
+//echo('<br>props ');
+//var_dump($product->props);
+$product->update();
+debug($product, '$product');
+
+//$product->insert()
+
 
 //$product->save();
 
@@ -44,4 +60,10 @@ if (class_exists($controllerClass)) {
 //var_dump($product->getAll());
 
 //echo $product->getAll();
+
+function debug($d, $description = '') {
+    echo "<p>{$description}: ";
+    var_dump($d);
+    echo "</p>";
+}
 
