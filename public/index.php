@@ -35,8 +35,8 @@ if (class_exists($controllerClass)) {
 $product = Products::getOne(4);
 //echo('<br>price ');
 //echo $product->price;
-$product->price = 11222; //Как перехватить это присваивание?
-$product->description = 'Шоколадный';
+$product->price = 25; //Как перехватить это присваивание?
+$product->description = 'Заморский';
 debug($product, '$product');
 
 //$product->name = 'Mars';
@@ -62,7 +62,7 @@ debug($product, '$product');
 //echo $product->getAll();
 
 function debug($d, $description = '') {
-    echo "<p>{$description}: ";
+    echo "<p><b>{$description}: </b><br/>";
     var_dump($d);
     echo "</p>";
 }
