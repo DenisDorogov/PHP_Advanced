@@ -13,6 +13,9 @@ class Products extends DbModel {
         $this->name = $name;
         $this->description = $description;
         $this->price = $price;
+        $this->props['name'] = $name;
+        $this->props['description'] = $description;
+        $this->props['price'] = $price;
 
     }
 
