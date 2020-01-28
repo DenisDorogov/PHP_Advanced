@@ -18,48 +18,19 @@ if (class_exists($controllerClass)) {
     $controller->runAction($actionName);
 } else die("404");
 
-//$product = new Products("Кофе", "Крепкий", 12);
-//$product->insert();
-//$product->delete();
-//var_dump($product);
 
 /**
  * @var Products $product
  */
+$product = new Products("Кофе", "Крепкий", 12);
+//$product = Products::getOne(5);
+//$product->price = 25; //Как перехватить это присваивание?
+//$product->description = 'Заморский';
+$product->insert();
+//debug($product, '$product');
 
-//$product = new Products("Кофе", "Крепкий", 12);
-//$product->save();
-//var_dump($product);
+//INSERT INTO products (name, description, price) VALUES (Кофе, Крепкий, 12);
 
-
-$product = Products::getOne(4);
-//echo('<br>price ');
-//echo $product->price;
-$product->price = 25; //Как перехватить это присваивание?
-$product->description = 'Заморский';
-debug($product, '$product');
-
-//$product->name = 'Mars';
-
-//echo('<br>price ');
-//echo $product->price;
-//echo('<br>props ');
-//var_dump($product->props);
-$product->update();
-debug($product, '$product');
-
-//$product->insert()
-
-
-//$product->save();
-
-//var_dump($product);
-//$product->delete();
-
-
-//var_dump($product->getAll());
-
-//echo $product->getAll();
 
 function debug($d, $description = '') {
     echo "<p><b>{$description}: </b><br/>";
