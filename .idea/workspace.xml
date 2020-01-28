@@ -21,6 +21,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
@@ -47,6 +48,9 @@
       <updated>1579952810426</updated>
       <workItem from="1579952819794" duration="166000" />
       <workItem from="1579953005863" duration="1288000" />
+      <workItem from="1580052938809" duration="1389000" />
+      <workItem from="1580098515300" duration="16766000" />
+      <workItem from="1580181960937" duration="16704000" />
     </task>
     <servers />
   </component>
