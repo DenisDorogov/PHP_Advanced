@@ -3,9 +3,9 @@
 namespace app\models;
 
 class Products extends DbModel {
-    private $name;
-    private $description;
-    private $price;
+    public $name;
+    public $description;
+    public $price;
 
     public function __construct($name = null, $description = null, $price = null)
     {
