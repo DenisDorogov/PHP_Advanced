@@ -26,15 +26,16 @@ $product = new Products("Кофе", "Крепкий", 12);
 //$product = Products::getOne(5);
 //$product->price = 25; //Как перехватить это присваивание?
 //$product->description = 'Заморский';
-$product->insert();
+//$product->id = 5;
+//$product->save();
 //debug($product, '$product');
 
 //INSERT INTO products (name, description, price) VALUES (Кофе, Крепкий, 12);
 
 
-function debug($d, $description = '') {
-    echo "<p><b>{$description}: </b><br/>";
-    var_dump($d);
-    echo "</p>";
-}
+//function debug($d, $description = '') {
+//    echo "<p><b>{$description}: </b><br/>";
+//    var_dump($d);
+//    echo "</p>";
+//}
 

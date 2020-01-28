@@ -3,7 +3,6 @@
 namespace app\models;
 
 class Products extends DbModel {
-//    private $id = null;
     private $name;
     private $description;
     private $price;
@@ -16,10 +15,7 @@ class Products extends DbModel {
         $this->props['name'] = $name;
         $this->props['description'] = $description;
         $this->props['price'] = $price;
-
     }
-
-
 
     public static function getTableName()
     {
