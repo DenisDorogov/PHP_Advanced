@@ -17,6 +17,7 @@ class Products extends DbModel {
         $this->props['price'] = $price;
     }
 
+
     public static function getTableName()
     {
         return "products";

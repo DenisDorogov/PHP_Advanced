@@ -22,7 +22,7 @@ if (class_exists($controllerClass)) {
 /**
  * @var Products $product
  */
-$product = new Products("Кофе", "Крепкий", 12);
+//$product = new Products("Кофе", "Крепкий", 12);
 //$product = Products::getOne(5);
 //$product->price = 25; //Как перехватить это присваивание?
 //$product->description = 'Заморский';

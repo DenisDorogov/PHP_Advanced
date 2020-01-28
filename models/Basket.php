@@ -6,7 +6,7 @@ class Basket extends DbModel
 {
     public $id;
     public $session_id;
-    public $goods_id;
+    public $product_id;
 
 
 
