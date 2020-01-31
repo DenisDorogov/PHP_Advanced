@@ -24,7 +24,7 @@ if (class_exists($controllerClass)) {
  */
 //$product = new Products("Кофе", "Крепкий2", 12);
 //$product = Products::getOne(13);
-var_dump($product->props);
+//var_dump($product->props);
 //$product->props['price'][0] = 25;
 //$product->props['description'][0] = 'Заморский';
 //var_dump($product->props);

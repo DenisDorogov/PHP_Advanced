@@ -31,7 +31,6 @@ class ProductController extends Controller
     {
         $id = (int)$_GET['id'];
         $product = Products::getOne($id);
-        debug($product, 'ActionCard $product');
         echo $this->render('card', ['product' => $product]);
     }
 
@@ -44,12 +43,12 @@ class ProductController extends Controller
     public function actionBasketAdd()
     {
         $id = (int)$_GET['id'];
-        $product = Products::getOne($id);
-        debug($product, '$product');
-        $basket = Basket::insertBasket($product);
-        debug($basket, '$basket');
 
-        echo $this->render('basket', ['basket' => $basket]);
+
+        $product = Products::getOne($id);
+        $basket = new Basket();
+        $basket->insertBasket($product);
+        $this->actionBasket();
     }
 
 
