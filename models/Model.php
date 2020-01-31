@@ -12,6 +12,6 @@ abstract class Model implements IModel
     public function __set($name, $value)
     {
         $this->name = $value;
-        $this->propsChanged[$name] = $value;
+        $this->props[$name] = [$value, true];
          }
 }

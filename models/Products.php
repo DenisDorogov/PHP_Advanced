@@ -3,18 +3,19 @@
 namespace app\models;
 
 class Products extends DbModel {
-    public $name;
-    public $description;
-    public $price;
+//    public $name;
+//    public $description;
+//    public $price;
+    public $props = [];
 
     public function __construct($name = null, $description = null, $price = null)
     {
-        $this->name = $name;
-        $this->description = $description;
-        $this->price = $price;
-        $this->props['name'] = $name;
-        $this->props['description'] = $description;
-        $this->props['price'] = $price;
+        $this->props['name'] = [$name, false];
+        $this->props['description'] = [$description, false];
+        $this->props['price'] = [$price, false];
+//        $this->props['name'] = $name;
+//        $this->props['description'] = $description;
+//        $this->props['price'] = $price;
     }
 
 

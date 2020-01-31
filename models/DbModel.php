@@ -26,10 +26,9 @@ abstract class DbModel extends Model
         $columns = [];
         foreach ($this->props as $key=>$value) {
             if ($key != "id") {
-                $params[":{$key}"] = $value;
+                $params[":{$key}"] = $value[0];
                 $columns[] = "`$key`";
             }
-
         }
         $columns = implode(", ", $columns); 
         $values = implode(", ", array_keys($params));
@@ -46,9 +45,9 @@ abstract class DbModel extends Model
         $columns = [];
         $sql = "UPDATE `{$this->getTableName()}` SET ";
         //Избавляюсь от первого лишнего элемента (пока не понял как он появился)
-        $this->propsChanged = array_slice($this->propsChanged, 1);
-        foreach ($this->propsChanged as $key => $value) {
-                $params[":{$key}"] = $value;
+        $this->props = array_slice($this->props, 1);
+        foreach ($this->props as $key => $value) {
+                $params[":{$key}"] = $value[0];
                 $sql = $sql . " {$key} = :{$key},";
                 $columns[] = "`$key`";
         };
@@ -57,7 +56,6 @@ abstract class DbModel extends Model
     }
 //TODO Решить проблему создания id.
     public function save() {//Проверяет наличие существующей записи, и выбирает метод.
-        echo('save is work');
         if (is_null($this->id))
             $this->insert();
         else

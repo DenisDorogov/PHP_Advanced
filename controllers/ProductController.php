@@ -4,6 +4,7 @@
 namespace app\controllers;
 
 
+use app\models\Basket;
 use app\models\Products;
 
 class ProductController extends Controller
@@ -30,6 +31,7 @@ class ProductController extends Controller
     {
         $id = (int)$_GET['id'];
         $product = Products::getOne($id);
+        debug($product, 'ActionCard $product');
         echo $this->render('card', ['product' => $product]);
     }
 
@@ -43,7 +45,11 @@ class ProductController extends Controller
     {
         $id = (int)$_GET['id'];
         $product = Products::getOne($id);
-        echo $this->render('card', ['product' => $product]);
+        debug($product, '$product');
+        $basket = Basket::insertBasket($product);
+        debug($basket, '$basket');
+
+        echo $this->render('basket', ['basket' => $basket]);
     }
 
 

@@ -18,7 +18,7 @@ abstract class Controller
         if (method_exists($this, $method)) {
             $this->$method();
         }
-        var_dump($method);
+//        var_dump($method);
     }
 
     public function render($template, $params = []) {
