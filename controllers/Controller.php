@@ -3,6 +3,8 @@
 
 namespace app\controllers;
 
+use app\engine\Render;
+use app\interfaces\IRenderer;
 
 abstract class Controller
 {
@@ -10,6 +12,12 @@ abstract class Controller
     private $defaultAction = 'index';
     private $layout = 'main';
     private $useLayout = true;
+    private $renderer;
+
+    public function __construct(IRenderer $renderer)
+    {
+        $this->renderer = $renderer;
+    }
 
     public function runAction($action = null)
     {
@@ -34,13 +42,14 @@ abstract class Controller
 
     public function renderTemplate($template, $params = [])
     {
-        ob_start();
-        extract($params);
-        $templatePath = TEMPLATES_DIR . $template . ".php";
-        if (file_exists($templatePath)) {
-            include $templatePath;
-        }
-        return ob_get_clean();
+//        ob_start(); TODO удалить коментарии
+//        extract($params);
+//        $templatePath = TEMPLATES_DIR . $template . ".php";
+//        if (file_exists($templatePath)) {
+//            include $templatePath;
+//        }
+//        return ob_get_clean();
+        return $this->renderer->renderTemplate($template, $params);
     }
 
 }
