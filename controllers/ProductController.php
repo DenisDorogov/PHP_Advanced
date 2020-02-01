@@ -17,7 +17,10 @@ class ProductController extends Controller
     public function actionCatalog()
     {
         $catalog = Products::getAll();
-        echo $this->render('catalog', ['catalog' => $catalog, "IMG_PATH_MIN" => "/img/min/"]);
+        echo $this->render('catalog', [
+            'catalog' => $catalog,
+            'IMG_PATH_MIN' => '/img/min/'
+        ]);
     }
 
 //    public function actionApiCatalog()
@@ -31,7 +34,10 @@ class ProductController extends Controller
     {
         $id = (int)$_GET['id'];
         $product = Products::getOne($id);
-        echo $this->render('card', ['product' => $product]);
+        echo $this->render('card', [
+            'product' => $product,
+            'IMG_PATH_MIN' => '/img/min/'
+        ]);
     }
 
     public function actionBasket()
