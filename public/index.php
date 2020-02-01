@@ -6,6 +6,7 @@ use app\models\{Products, Users, Basket};
 use app\engine\{Autoload, Db, Render, TwigRender};
 
 spl_autoload_register([new Autoload(), 'loadClass']);
+include realpath("../vendor/Autoload.php");
 
 $url = explode('/', $_SERVER['REQUEST_URI']);
 $controllerName = $url[1] ?: 'product';
@@ -13,7 +14,7 @@ $actionName = $url[2];
 
 $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
 if (class_exists($controllerClass)) {
-    $controller = new $controllerClass(new Render());
+    $controller = new $controllerClass(new TwigRender());
     $controller->runAction($actionName);
 } else die("404");
 

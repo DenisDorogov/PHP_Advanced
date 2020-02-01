@@ -17,15 +17,15 @@ class ProductController extends Controller
     public function actionCatalog()
     {
         $catalog = Products::getAll();
-        echo $this->render('catalog', ['catalog' => $catalog]);
+        echo $this->render('catalog', ['catalog' => $catalog, "IMG_PATH_MIN" => "/img/min/"]);
     }
 
-    public function actionApiCatalog()
-    {
-        $catalog = Products::getAll();
-        echo json_encode($catalog, JSON_UNESCAPED_UNICODE);
-        die();
-    }
+//    public function actionApiCatalog()
+//    {
+//       $catalog = Products::getAll();
+//       echo json_encode($catalog, JSON_UNESCAPED_UNICODE);
+//       die();
+//    }
 
     public function actionCard()
     {
