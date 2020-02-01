@@ -3,7 +3,7 @@ include realpath("../config/config.php");
 include realpath("../engine/Autoload.php");
 
 use app\models\{Products, Users, Basket};
-use app\engine\{Autoload, Db};
+use app\engine\{Autoload, Db, Render, TwigRender};
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
@@ -13,7 +13,7 @@ $actionName = $url[2];
 
 $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
 if (class_exists($controllerClass)) {
-    $controller = new $controllerClass();
+    $controller = new $controllerClass(new Render());
     $controller->runAction($actionName);
 } else die("404");
 
