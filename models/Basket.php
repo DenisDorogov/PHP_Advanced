@@ -10,6 +10,17 @@ class Basket extends DbModel
     public $session_id;
     public $product_id;
 
+    protected $props = [
+        'session_id' => false,
+        'product_id' => false
+    ];
+
+    public function __construct($session_id = null, $product_id = null)
+    {
+        $this->session_id = $session_id;
+        $this->product_id = $product_id;
+    }
+
     public static function insertBasket($product)
     {   //TODO Сделать проверку на существование, и увеличение количества
         $params[":product_id"] = (int)$product->id;
@@ -22,9 +33,8 @@ class Basket extends DbModel
 
     public function getBasket()
     {
-        $basket = new Basket();
-        $basket->getAll();
-//        foreach ($basket as $key=>$value) {} //TODO Сделать запрос свойств товаров из таблицы корзины
+        $sql = "SELECT p.id id_prod, b.id id_basket, p.name, p.description, p.price FROM basket b,products p WHERE b.product_id=p.id AND session_id = :session";
+        return Db::getInstance()->queryAll($sql, ['session' => $session]);
     }
 
     public static function getTableName()

@@ -7,6 +7,25 @@ use app\interfaces\IModel;
 
 abstract class DbModel extends Model
 {
+    public static function getOneWhere($field, $value) {
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE `$field`=:value";
+        return Db::getInstance()->queryObject($sql, ["value" => $value], static::class);
+    }
+
+    public static function getCountWhere($field, $value)
+    {
+        $tableName = static::getTableName();
+        $sql = "SELECT count(id) as count FROM {$tableName} WHERE `$field`=:value";
+        return Db::getInstance()->queryOne($sql, ["value" => $value])['count'];
+    }
+
+    public static function showLimit($page)
+    {
+        $tableName = static::getTableName();
+        $sql = "SELECT * FROM {$tableName} WHERE 1 LIMIT ?";
+        return Db::getInstance()->executeLimit($sql, $page);
+    }
     public static function getOne($id)
     {
         $tableName = static::getTableName();

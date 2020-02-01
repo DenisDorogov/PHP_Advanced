@@ -13,5 +13,13 @@ abstract class Model implements IModel
     {
         $this->name = $value;
         $this->props[$name] = [$value, true];
-         }
+    }
+    public function __get($name) {
+        return $this->$name;
+    }
+
+    public function __isset($name)
+    {
+        return isset($this->$name);
+    }
 }

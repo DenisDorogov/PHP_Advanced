@@ -49,12 +49,10 @@ class ProductController extends Controller
     public function actionBasketAdd()
     {
         $id = (int)$_GET['id'];
-
-
         $product = Products::getOne($id);
         $basket = new Basket();
         $basket->insertBasket($product);
-        $this->actionBasket();
+//        $this->actionBasket();
     }
 
 

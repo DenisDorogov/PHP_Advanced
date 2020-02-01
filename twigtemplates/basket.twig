@@ -1,8 +1,15 @@
 <h2>Корзина</h2>
 {% for item in basket %}
-<p>id товара: {{ item.product_id }}</p><br>
+    <div>
+        <h2>{{ item.name}}</h2>
+        <p>Описание: {{ item.description }}</p>
+        <p>Цена:{{ item.price }}</p>
+        <button data-id="{{item.id_basket}}" class="delete">Удалить</button>
+    </div>
+
 {% endfor %}
 
     <br>
-
-
+<script>
+    //TODO реализовать удаление из корзины асинхпронно (javascript remove) 0:52
+</script>

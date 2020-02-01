@@ -6,7 +6,7 @@ class Products extends DbModel {
 //    public $name;
 //    public $description;
 //    public $price;
-    public $props = [];
+    protected $props = [];
 
     public function __construct($name = null, $description = null, $price = null)
     {

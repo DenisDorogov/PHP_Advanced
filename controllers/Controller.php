@@ -26,13 +26,16 @@ abstract class Controller
         if (method_exists($this, $method)) {
             $this->$method();
         }
-//        var_dump($method);
     }
 
     public function render($template, $params = []) {
         if ($this->useLayout) {
             return $this->renderTemplate("layouts/{$this->layout}", [
-                'menu' => $this->renderTemplate('menu'),
+                'menu' => $this->renderTemplate('menu', [
+                    'count' => Basket::getCountWhere('session_id', session_id()),
+                    'auth' => Users::isAuth(),
+                    'username' => Users::getName()
+                ]),
                 'content' => $this->renderTemplate($template, $params)
             ]);
         } else {
