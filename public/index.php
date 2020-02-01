@@ -7,10 +7,9 @@ use app\engine\{Autoload, Db};
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 
-
-$controllerName = $_GET['c'] ?: 'product';
-$actionName = $_GET['a'];
-
+$url = explode('/', $_SERVER['REQUEST_URI']);
+$controllerName = $url[1] ?: 'product';
+$actionName = $url[2];
 
 $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
 if (class_exists($controllerClass)) {
