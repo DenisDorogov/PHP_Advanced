@@ -1,4 +1,5 @@
 <h2>Каталог</h2>
+<!--TODO Реализовать TWIG-->
 <?php foreach ($catalog as $key => $value) :?>
     <a href="?&a=card&id=<?=$catalog[$key]['id']?>">
         <img src="<?=IMG_PATH_MIN . $catalog[$key]['img']?>" alt=""><br>
