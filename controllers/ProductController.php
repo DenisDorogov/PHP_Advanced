@@ -4,8 +4,9 @@
 namespace app\controllers;
 
 
-use app\models\Basket;
+//use app\models\Basket;
 use app\models\Products;
+use app\engine\Request;
 
 class ProductController extends Controller
 {
@@ -16,10 +17,12 @@ class ProductController extends Controller
 
     public function actionCatalog()
     {
-        $catalog = Products::getAll();
+        $page = (int)(new Request())->getParams()['page'];;
+        $catalog = Products::showLimit(($page + 1) * 2);
         echo $this->render('catalog', [
             'catalog' => $catalog,
-            'IMG_PATH_MIN' => '/img/min/'
+            'IMG_PATH_MIN' => '/img/min/',
+            'page' => ++$page
         ]);
     }
 
@@ -32,7 +35,7 @@ class ProductController extends Controller
 
     public function actionCard()
     {
-        $id = (int)$_GET['id'];
+        $id = (int)(new Request())->getParams()['id'];;
         $product = Products::getOne($id);
         echo $this->render('card', [
             'product' => $product,

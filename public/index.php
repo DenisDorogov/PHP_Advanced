@@ -8,7 +8,7 @@ use app\engine\{Autoload, Db, Render, TwigRender};
 spl_autoload_register([new Autoload(), 'loadClass']);
 include realpath("../vendor/Autoload.php");
 
-$url = explode('/', $_SERVER['REQUEST_URI']);
+$request = new Request();
 $controllerName = $url[1] ?: 'product';
 $actionName = $url[2];
 

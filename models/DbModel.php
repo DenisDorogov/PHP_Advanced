@@ -44,19 +44,16 @@ abstract class DbModel extends Model
         $params = [];
         $columns = [];
         foreach ($this->props as $key=>$value) {
-            if ($key != "id") {
+//            if ($key != "id") {
                 $params[":{$key}"] = $value[0];
                 $columns[] = "`$key`";
-            }
+//            }
         }
         $columns = implode(", ", $columns); 
         $values = implode(", ", array_keys($params));
         $sql = "INSERT INTO `{$this->getTableName()}`({$columns}) VALUES ({$values})";
         Db::getInstance()->execute($sql, $params);
         $this->id = Db::getInstance()->lastInsertId();
-        //Присваиваем свойству id идентификатор последней вставленной записи.
-
-
     }
 
     public function update() {

@@ -3,9 +3,38 @@
 {% for item in catalog %}
 <a href="/product/card/?id={{ item.id}}">
     <img src="{{ IMG_PATH_MIN }}{{ item.img }}" alt=""><br>
-    <b>{{item.name}}</b><br>
-    {{item.description}}<br> Цена:
-    {{item.price}}<br>
+    <p> <b>{{item.name}}</b></p>
+    <p>{{item.description}}</p>
+    <p>Цена: {{item.price}}</p>
+    <button data-id="{{ item.id }}" class="buy">Купить</button>
+    <br>
+    <hr>
     {% endfor %}
 </a>
 <br>
+<a href="/product/catalog/?page={{ page }}">Показать еще</a>
+
+<script>
+    let buttons = document.querySelectorAll('.buy');
+    buttons.forEach((elem) => {
+        elem.addEventListener('click', () => {
+            let id = elem.getAttribute('data-id');
+            (
+                async () => {
+                    const response = await fetch('/basket/AddToBasket/', {
+                        method: 'POST',
+                        headers: new Headers({
+                            'Content-Type': 'application/json'
+                        }),
+                        body: JSON.stringify({
+                            id: id
+                        })
+                    });
+                    const answer = await response.json();
+                    document.getElementById('count').innerText = answer.count;
+                    console.log(answer);
+                }
+            )();
+        })
+    });
+</script>

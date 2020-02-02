@@ -40,7 +40,6 @@ class Db
         );
     }
 
-//"SELECT * FROM products WHERE id = :id;", ["id" => 1]
     private function query($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params);
@@ -49,9 +48,8 @@ class Db
 
     public function lastInsertId() {
         return $this->connection->lastInsertId();
-        //lastInsertId() возвращает id последней вставленной записи.
     }
-    //Кастомный query , возвращающий объект.
+
     public function queryObject($sql, $params, $class) {
         $pdoStatement = $this->query($sql, $params);
         $pdoStatement->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, $class);
@@ -63,6 +61,13 @@ class Db
     public function execute($sql, $params) {
         $this->query($sql, $params);
         return true;
+    }
+
+    public function executeLimit($sql, $page) {
+        $pdoStatement = $this->getConnection()->prepare($sql);
+        $pdoStatement->bindValue(1, $page, \PDO::PARAM_INT);
+        $pdoStatement->execute();
+        return $pdoStatement->fetchAll();
     }
 
     public function queryOne($sql, $params = []) {
