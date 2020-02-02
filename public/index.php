@@ -3,7 +3,7 @@ include realpath("../config/config.php");
 include realpath("../engine/Autoload.php");
 
 use app\models\{Products, Users, Basket};
-use app\engine\{Autoload, Db, Render, TwigRender};
+use app\engine\{Autoload, Db, Render, TwigRender, Request};
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 include realpath("../vendor/Autoload.php");

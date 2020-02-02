@@ -29,7 +29,7 @@ class Users extends DbModel
 
     public static function auth($login, $pass) {
         $user = static::getOneWhere('login', $login);
-        if ($pass == $user->pass) {
+        if ($pass == $user->pass) { //TODO сделать сравнение хеша.
             $_SESSION['login'] = $login;
             return true;
         } else {
