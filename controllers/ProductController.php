@@ -37,6 +37,8 @@ class ProductController extends Controller
     {
         $id = (int)(new Request())->getParams()['id'];;
         $product = Products::getOne($id);
+        debug($product->props, '$product');
+
         echo $this->render('card', [
             'product' => $product,
             'IMG_PATH_MIN' => '/img/min/'

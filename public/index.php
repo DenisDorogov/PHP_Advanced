@@ -1,4 +1,5 @@
 <?php
+session_start();
 include realpath("../config/config.php");
 include realpath("../engine/Autoload.php");
 
@@ -9,8 +10,9 @@ spl_autoload_register([new Autoload(), 'loadClass']);
 include realpath("../vendor/Autoload.php");
 
 $request = new Request();
-$controllerName = $url[1] ?: 'product';
-$actionName = $url[2];
+
+$controllerName = $request->getControllerName();
+$actionName = $request->getActionName();
 
 $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
 if (class_exists($controllerClass)) {

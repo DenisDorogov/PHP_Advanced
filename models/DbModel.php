@@ -9,7 +9,7 @@ abstract class DbModel extends Model
 {
     public static function getOneWhere($field, $value) {
         $tableName = static::getTableName();
-        $sql = "SELECT * FROM {$tableName} WHERE `$field`=:value";
+        $sql = "SELECT * FROM {$tableName} WHERE `$field`=:value;";
         return Db::getInstance()->queryObject($sql, ["value" => $value], static::class);
     }
 
@@ -26,6 +26,7 @@ abstract class DbModel extends Model
         $sql = "SELECT * FROM {$tableName} WHERE 1 LIMIT ?";
         return Db::getInstance()->executeLimit($sql, $page);
     }
+
     public static function getOne($id)
     {
         $tableName = static::getTableName();
