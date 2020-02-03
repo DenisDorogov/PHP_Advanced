@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include realpath("../config/config.php");
 include realpath("../engine/Autoload.php");
 

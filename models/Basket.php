@@ -24,12 +24,12 @@ class Basket extends DbModel
     public static function getBasket($session)
     {
         $sql = "SELECT p.id id_prod, b.id id_basket, p.name, p.description, p.price, p.img FROM basket b, products p WHERE b.product_id=p.id AND session_id = :session";
-        return Db::getInstance()->queryAll($sql, ['session' => $session_id]);
+        return Db::getInstance()->queryAll($sql, ['session' => $session]);
     }
 
     public static function deleteFromBasket()
     {
-        return Db::getInstance()->queryAll($sql, ['session' => $session]);
+//        return Db::getInstance()->queryAll($sql, ['session' => $session]);
     }
 
     public static function getTableName()

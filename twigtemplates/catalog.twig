@@ -23,7 +23,7 @@
             let id = elem.getAttribute('data-id');
             (
                 async () => {
-                    const response = await fetch('/basket/AddToBasket/', {
+                    const response = await fetch('/basket/addToBasket/', {
                         method: 'POST',
                         headers: new Headers({
                             'Content-Type': 'application/json'
@@ -32,6 +32,7 @@
                             id: id
                         })
                     });
+                    console.log('Отправлен запрос');             //TODO удалить
                     const answer = await response.json();
                     document.getElementById('count').innerText = answer.count;
                     console.log(answer);
