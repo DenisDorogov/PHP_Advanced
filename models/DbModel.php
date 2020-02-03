@@ -60,7 +60,7 @@ abstract class DbModel extends Model
         $columns = [];
         $sql = "UPDATE `{$this->getTableName()}` SET ";
         //Избавляюсь от первого лишнего элемента (пока не понял как он появился)
-        $this->props = array_slice($this->props, 1);
+//        $this->props = array_slice($this->props, 1);
         foreach ($this->props as $key => $value) {
                 $params[":{$key}"] = $value[0];
                 $sql = $sql . " {$key} = :{$key},";
@@ -69,12 +69,20 @@ abstract class DbModel extends Model
         $sql = substr($sql, 0, -1) . ' WHERE id = :id;';
         Db::getInstance()->execute($sql, $params);
     }
-//TODO Решить проблему создания id.
+
     public function save() {//Проверяет наличие существующей записи, и выбирает метод.
+        var_dump($this->id);
         if (is_null($this->id))
+        {
             $this->insert();
-        else
-            $this->update();
+        } else {
+            if ($this->getOne($this->id)) {
+                $this->update();
+            } else {
+                $this->insert();
+            }
+        }
+
     }
 
     public function delete() {

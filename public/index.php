@@ -37,7 +37,6 @@ if (class_exists($controllerClass)) {
 
 //debug($product, '$product');
 
-//INSERT INTO products (name, description, price) VALUES (Кофе, Крепкий, 12);
 
 
 function debug($d, $description = '') {
