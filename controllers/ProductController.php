@@ -45,20 +45,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function actionBasket()
-    {
-        $basket = Basket::getAll();
-        echo $this->render('basket', ['basket' => $basket]);
-    }
 
-    public function actionBasketAdd()
-    {
-        $id = (int)$_GET['id'];
-        $product = Products::getOne($id);
-        $basket = new Basket();
-        $basket->insertBasket($product);
-//        $this->actionBasket();
-    }
 
 
 

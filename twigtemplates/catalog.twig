@@ -6,11 +6,13 @@
     <p> <b>{{item.name}}</b></p>
     <p>{{item.description}}</p>
     <p>Цена: {{item.price}}</p>
+
+</a>
     <button data-id="{{ item.id }}" class="buy">Купить</button>
     <br>
     <hr>
-    {% endfor %}
-</a>
+{% endfor %}
+
 <br>
 <a href="/product/catalog/?page={{ page }}">Показать еще</a>
 

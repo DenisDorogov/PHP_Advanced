@@ -44,16 +44,8 @@ abstract class Controller
             return $this->renderTemplate($template, $params);
         }
     }
-
     public function renderTemplate($template, $params = [])
     {
-//        ob_start(); TODO удалить коментарии
-//        extract($params);
-//        $templatePath = TEMPLATES_DIR . $template . ".php";
-//        if (file_exists($templatePath)) {
-//            include $templatePath;
-//        }
-//        return ob_get_clean();
         return $this->renderer->renderTemplate($template, $params);
     }
 

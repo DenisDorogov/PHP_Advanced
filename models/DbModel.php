@@ -42,6 +42,7 @@ abstract class DbModel extends Model
     }
 
     public function insert() {
+        echo 'Сработал insert <br>';
         $params = [];
         $columns = [];
         foreach ($this->props as $key=>$value) {
@@ -56,6 +57,7 @@ abstract class DbModel extends Model
     }
 
     public function update() {
+        echo 'Сработал update <br>';
         $params[':id'] = $this->id;
         $columns = [];
         $sql = "UPDATE `{$this->getTableName()}` SET ";

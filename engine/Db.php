@@ -43,6 +43,7 @@ class Db
     private function query($sql, $params){
         $pdoStatement = $this->getConnection()->prepare($sql);
         $pdoStatement->execute($params);
+//        debug($pdoStatement->execute($params), '$pdoStatement query');
         return $pdoStatement;
     }
 

@@ -1,11 +1,14 @@
 <h2>Корзина</h2>
-{% for item in basket %}
+{% for item in products %}
     <div>
-        <h2>{{ item.name}}</h2>
+        <img src="{{ IMG_PATH_MIN }}{{ item.img }}" alt="{{ item.name }}">
+        <h4>{{ item.name }}</h4>
         <p>Описание: {{ item.description }}</p>
         <p>Цена:{{ item.price }}</p>
         <button data-id="{{item.id_basket}}" class="delete">Удалить</button>
+        <hr>
     </div>
+
 
 {% endfor %}
 
