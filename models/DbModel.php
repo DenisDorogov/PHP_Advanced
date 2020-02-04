@@ -56,21 +56,39 @@ abstract class DbModel extends Model
         $this->id = Db::getInstance()->lastInsertId();
     }
 
-    public function update() {
-        echo 'Сработал update <br>';
-        $params[':id'] = $this->id;
-        $columns = [];
-        $sql = "UPDATE `{$this->getTableName()}` SET ";
-        //Избавляюсь от первого лишнего элемента (пока не понял как он появился)
-//        $this->props = array_slice($this->props, 1);
+    public function update()
+    {
+        $params = [];
+        $colums = [];
         foreach ($this->props as $key => $value) {
-                $params[":{$key}"] = $value[0];
-                $sql = $sql . " {$key} = :{$key},";
-                $columns[] = "`$key`";
-        };
-        $sql = substr($sql, 0, -1) . ' WHERE id = :id;';
+            if (!$value) continue;
+            $params[":{$key}"] = $this->$key;
+            $colums[] .= "`" . $key . "` = :" . $key;
+            $this->props[$key] = false;
+        }
+        $colums = implode(", ", $colums);
+        $params[':id'] = $this->id;
+        $tableName = static::getTableName();
+        $sql = "UPDATE `{$tableName}` SET {$colums} WHERE `id` = :id";
+
         Db::getInstance()->execute($sql, $params);
     }
+
+//    {
+//        echo 'Сработал update <br>';
+//        $params[':id'] = $this->id;
+//        $columns = [];
+//        $sql = "UPDATE `{$this->getTableName()}` SET ";
+//        //Избавляюсь от первого лишнего элемента (пока не понял как он появился)
+////        $this->props = array_slice($this->props, 1);
+//        foreach ($this->props as $key => $value) {
+//                $params[":{$key}"] = $value[0];
+//                $sql = $sql . " {$key} = :{$key},";
+//                $columns[] = "`$key`";
+//        };
+//        $sql = substr($sql, 0, -1) . ' WHERE id = :id;';
+//        Db::getInstance()->execute($sql, $params);
+//    }
 
     public function save() {//Проверяет наличие существующей записи, и выбирает метод.
         var_dump($this->id);

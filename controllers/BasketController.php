@@ -16,7 +16,7 @@ class BasketController extends Controller
 
 //        debug(session_id(),'$session actionIndex');
         $basket = Basket::getBasket($session);
-        debug($session ,'$basket actionIndex');
+//        debug($session ,'$basket actionIndex');
 
         echo $this->render('basket', [
             'products' => $basket,
@@ -27,7 +27,7 @@ class BasketController extends Controller
 
     public function actionAddToBasket() {
         $id = (new Request())->getParams()['id'];
-        debug($id, '$id');
+//        debug($id, '$id');
         (new Basket(session_id(), $id))->save();
         header('Content-Type: application/json');
         echo json_encode(['status' => 'ok', 'count' => Basket::getCountWhere('session_id', session_id())]);

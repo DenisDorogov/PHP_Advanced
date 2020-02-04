@@ -37,7 +37,7 @@ class ProductController extends Controller
     {
         $id = (int)(new Request())->getParams()['id'];
         $product = Products::getOne($id);
-        debug($product->props, '$product');
+        debug($product, '$product');
 
         echo $this->render('card', [
             'product' => $product,
