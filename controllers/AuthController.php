@@ -12,6 +12,7 @@ class AuthController extends Controller
     public function actionLogin() {
         $login = (new Request())->getParams()['login'];
         $pass = (new Request())->getParams()['pass'];
+//        $hesh = password_hash($pass, PASSWORD_BCRYPT);
 
         if (Users::auth($login, $pass)) {
             header("Location: " . $_SERVER['HTTP_REFERER']);

@@ -2,21 +2,25 @@
 
 namespace app\models;
 
+use app\models\Users;
+
 class Users extends DbModel
 {
-    public $id;
-    public $login;
-    public $pass;
+    protected $id;
+    protected $login;
+    protected $pass;
+    protected $hesh;
 
     protected $props = [
         'login' => false,
-        'pass' => false
+        'hesh' => false
     ];
 
-    public function __construct($login = null, $pass = null)
+    public function __construct($login = null, $pass = null, $hesh= null)
     {
         $this->login = $login;
         $this->pass = $pass;
+        $this->hesh = $hesh;
     }
 
     public static function isAuth() {
@@ -28,8 +32,10 @@ class Users extends DbModel
     }
 
     public static function auth($login, $pass) {
-        $user = static::getOneWhere('login', $login);
-        if ($pass == $user->pass) { //TODO сделать сравнение хеша.
+        $user = Users::getOneWhere('login', $login);
+
+        debug($user, '$user');
+        if (password_verify($pass, $user->hesh)) { //TODO сделать сравнение хеша.
             $_SESSION['login'] = $login;
             return true;
         } else {
