@@ -18,7 +18,7 @@ abstract class DbModel extends Model
         $tableName = static::getTableName();
         $sql = "SELECT count(id) as count FROM {$tableName} WHERE `$field`=:value";
         return Db::getInstance()->queryOne($sql, ["value" => $value])['count'];
-    }
+    } //SELECT count(id) as count FROM basket WHERE session_id = "07je2u80mgqsrtds58pk4a9dg39g7s1h";
 
     public static function showLimit($page)
     {
@@ -88,6 +88,7 @@ abstract class DbModel extends Model
     }
 
     public function delete() {
+        echo 'Сработал delete';
         $tableName = static::getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
         return Db::getInstance()->execute($sql, ['id' => $this->id]);

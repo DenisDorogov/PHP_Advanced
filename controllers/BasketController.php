@@ -12,15 +12,16 @@ class BasketController extends Controller
 {
     public function actionIndex() {
         $session = session_id();
-        $session = '07je2u80mgqsrtds58pk4a9dg39g7s1h'; //Заглушка
+//        $session = '07je2u80mgqsrtds58pk4a9dg39g7s1h'; //Заглушка
 
-        debug(session_id(),'$session actionIndex');
+//        debug(session_id(),'$session actionIndex');
         $basket = Basket::getBasket($session);
-//        debug($basket,'$basket actionIndex');
+        debug($session ,'$basket actionIndex');
 
         echo $this->render('basket', [
             'products' => $basket,
             'IMG_PATH_MIN' => '/img/min/'
+//            ,'count' => count($basket)
         ]);
     }
 
