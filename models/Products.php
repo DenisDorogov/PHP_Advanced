@@ -8,6 +8,7 @@ class Products extends DbModel {
     protected $description;
     protected $price;
     protected $img;
+    protected $category;
     protected $props = [
         'name' => false,
         'description' => false,
@@ -21,7 +22,7 @@ class Products extends DbModel {
         $name = null,
         $description = null,
         $price = null,
-        $img = null,
+        $img = "NoPhoto.jpg",
         $category = null
     )
     {

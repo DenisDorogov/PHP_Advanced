@@ -17,6 +17,7 @@ class BasketController extends Controller
 //        debug(session_id(),'$session actionIndex');
         $basket = Basket::getBasket($session);
 //        debug($session ,'$basket actionIndex');
+//        debug($productBasket, '$productBasket');
 
         echo $this->render('basket', [
             'products' => $basket,
@@ -29,13 +30,17 @@ class BasketController extends Controller
         $id = (new Request())->getParams()['id'];
 //        debug($id, '$id');
         (new Basket(session_id(), $id))->save();
+//        global $productBasket = new Basket(session_id(), $id);
+//        debug($productBasket, '$productBasket');
+
+//        $productBasket->save();
         header('Content-Type: application/json');
         echo json_encode(['status' => 'ok', 'count' => Basket::getCountWhere('session_id', session_id())]);
-//        echo $this->render('basket', [
-//            'count' => $basket,
-//            'IMG_PATH_MIN' => '/img/min/'
-//        ]);
-//        die;
+        echo $this->render('basket', [
+            'count' => Basket::getCountWhere('session_id', session_id()),
+            'IMG_PATH_MIN' => '/img/min/'
+        ]);
+        die;
     }
 
     public function actionRemoveFromBasket()

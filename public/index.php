@@ -33,6 +33,9 @@ if (class_exists($controllerClass)) {
 //$product->props['description'][0] = 'Заморский';
 //var_dump($product->props);
 
+//$basketItem = new Basket(session_id(), 5);
+//debug($basketItem, '$product');
+//$basketItem->save();
 //$product->props['id'] = 8;
 //$product->save();
 //$product->delete();

@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function actionCatalog()
     {
         $page = (int)(new Request())->getParams()['page'];
-        $catalog = Products::showLimit(($page + 1) * 2);
+        $catalog = Products::showLimit(($page + 1) * 4);
         echo $this->render('catalog', [
             'catalog' => $catalog,
             'IMG_PATH_MIN' => '/img/min/',
@@ -37,7 +37,7 @@ class ProductController extends Controller
     {
         $id = (int)(new Request())->getParams()['id'];
         $product = Products::getOne($id);
-        debug($product, '$product');
+//        debug($product, '$product');
 
         echo $this->render('card', [
             'product' => $product,

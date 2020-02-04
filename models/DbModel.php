@@ -45,8 +45,9 @@ abstract class DbModel extends Model
         echo 'Сработал insert <br>';
         $params = [];
         $columns = [];
-        foreach ($this->props as $key=>$value) {
-                $params[":{$key}"] = $value[0];
+        foreach ($this as $key=>$value) {
+                if ($key == 'props') continue;
+                $params[":{$key}"] = $value;
                 $columns[] = "`$key`";
         }
         $columns = implode(", ", $columns); 
@@ -60,11 +61,11 @@ abstract class DbModel extends Model
     {
         $params = [];
         $colums = [];
-        foreach ($this->props as $key => $value) {
+        foreach ($this as $key => $value) {
             if (!$value) continue;
-            $params[":{$key}"] = $this->$key;
+            $params[":{$key}"] = $this->key;
             $colums[] .= "`" . $key . "` = :" . $key;
-            $this->props[$key] = false;
+            $this->key = false;
         }
         $colums = implode(", ", $colums);
         $params[':id'] = $this->id;
