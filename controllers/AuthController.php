@@ -5,6 +5,7 @@ namespace app\controllers;
 
 
 use app\engine\Request;
+use app\models\Basket;
 use app\models\Users;
 
 class AuthController extends Controller
@@ -27,6 +28,10 @@ class AuthController extends Controller
     public function actionLogout() {
         session_regenerate_id();
         setcookie('hash', '', -10, '/');
+        $this->renderTemplate('menu', [
+            'count' => 0,
+            'auth' => false
+            ]);
         header("Location: " . $_SERVER['HTTP_REFERER']);
         exit();
     }

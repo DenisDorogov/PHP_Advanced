@@ -39,7 +39,7 @@ class ProductController extends Controller
         $product = Products::getOne($id);
         echo $this->render('card', [
             'product' => $product,
-            'IMG_PATH_MIN' => '/img/min/'
+            'IMG_PATH_LARGE' => '/img/large/'
         ]);
     }
 

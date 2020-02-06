@@ -26,6 +26,7 @@ class Users extends DbModel
     }
 
     public static function isAuth() {
+        var_dump(isset($_SESSION['login']));
         return isset($_SESSION['login']);
     }
 
