@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use app\models\Users;
 
 class Users extends DbModel
 {
@@ -33,10 +32,9 @@ class Users extends DbModel
 
     public static function auth($login, $pass) {
         $user = Users::getOneWhere('login', $login);
-
-        debug($user, '$user');
-        if (password_verify($pass, $user->hesh)) { //TODO сделать сравнение хеша.
+        if (password_verify($pass, $user->name)) { //TODO сделать сравнение хеша.
             $_SESSION['login'] = $login;
+            setcookie('login', $login, time()+180, '/');
             return true;
         } else {
             return false;
