@@ -10,19 +10,23 @@ use app\engine\{Autoload, Db, Render, TwigRender, Request};
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 include realpath("../vendor/Autoload.php");
+try {
+    $request = new Request();
 
-$request = new Request();
+    $controllerName = $request->getControllerName();
+    $actionName = $request->getActionName();
 
-$controllerName = $request->getControllerName();
-$actionName = $request->getActionName();
+    $controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
+    if (class_exists($controllerClass)) {
+        $controller = new $controllerClass(new TwigRender());
+        $controller->runAction($actionName);
+    } else die("404");
 
-$controllerClass = CONTROLLER_NAMESPACE . ucfirst($controllerName) . "Controller";
-if (class_exists($controllerClass)) {
-    $controller = new $controllerClass(new TwigRender());
-    $controller->runAction($actionName);
-} else die("404");
-
-
+} catch (\PDOException $e) {
+    var_dump($e->getMessage());
+} catch (\Exception $e) {
+    var_dump($e);
+}
 /**
  * @var Products $product
  */
