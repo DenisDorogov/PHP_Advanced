@@ -42,7 +42,6 @@ abstract class DbModel extends Model
     }
 
     public function insert() {
-        echo 'Сработал insert <br>';
         $params = [];
         $columns = [];
         foreach ($this as $key=>$value) {
@@ -76,7 +75,6 @@ abstract class DbModel extends Model
     }
 
     public function save() {//Проверяет наличие существующей записи, и выбирает метод.
-        var_dump($this->id);
         if (is_null($this->id))
         {
             $this->insert();

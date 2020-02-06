@@ -5,6 +5,7 @@
     <title>Document</title>
 </head>
 <body>
+
 <?=$menu?>
 <?=$content?>
 </body>

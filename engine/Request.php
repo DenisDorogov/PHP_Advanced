@@ -21,7 +21,6 @@ class Request
     private function parseRequest() {
         $this->method = $_SERVER['REQUEST_METHOD'];
         $url = explode('/', $this->requestString);
-
         $this->controllerName = $url[1] ?: 'product';
         $this->actionName = $url[2];
         $this->params = $_REQUEST;
@@ -31,7 +30,6 @@ class Request
                 $this->params[$key] = $elem;
             }
         }
-
     }
 
     /**

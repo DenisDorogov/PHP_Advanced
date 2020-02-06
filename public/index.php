@@ -10,6 +10,10 @@ use app\engine\{Autoload, Db, Render, TwigRender, Request};
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 include realpath("../vendor/Autoload.php");
+
+//$user = Users::getOneWhere('login', 'admin');
+//var_dump($user);
+
 try {
     $request = new Request();
 

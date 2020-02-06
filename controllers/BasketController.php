@@ -7,17 +7,20 @@ namespace app\controllers;
 use app\engine\Request;
 use app\models\Basket;
 use app\models\Products;
+use app\models\Users;
 
 class BasketController extends Controller
 {
     public function actionIndex() {
         $session = session_id();
+//        if ($_SESSION[hash]$user->hash))
+
         $basket = Basket::getBasket($session);
 
         echo $this->render('basket', [
             'products' => $basket,
             'IMG_PATH_MIN' => '/img/min/'
-            ,'count' => count($basket)
+//            ,'count' => count($basket)
         ]);
     }
 
@@ -39,18 +42,18 @@ class BasketController extends Controller
     {
         $id = (new Request())->getParams()['id'];
         $basketDeleteElem = Basket::getOne($id);
-        var_dump($basketDeleteElem);
+//        var_dump($basketDeleteElem);
         if ($basketDeleteElem->session_id == session_id()) {
-            var_dump(session_id());
+//            var_dump(session_id());
             $basketDeleteElem->delete();
         } else {
-            var_dump(session_id());
-            var_dump($basketDeleteElem->session_id);
+//            var_dump(session_id());
+//            var_dump($basketDeleteElem->session_id);
             die('Попытка несанкционированного удаления');
         };
 
         header('Content-Type: application/json');
-        echo json_encode(['status' => 'ok', 'count' => Basket::getCountWhere('session_id', session_id())]);
+        echo json_encode(['status' => 'ok', 'id' => $id, 'count' => Basket::getCountWhere('session_id', session_id())]);
     }
 
     public function actionBasket()

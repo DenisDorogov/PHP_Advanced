@@ -8,18 +8,21 @@ class Users extends DbModel
     protected $id;
     protected $login;
     protected $pass;
-    protected $hesh;
+    protected $hash;
 
     protected $props = [
         'login' => false,
-        'hesh' => false
+        'hash' => false
     ];
 
-    public function __construct($login = null, $pass = null, $hesh= null)
+    public function __construct($login = null, $pass = null, $hash = null)
     {
         $this->login = $login;
         $this->pass = $pass;
-        $this->hesh = $hesh;
+        $this->hash = $hash;
+//        $this->hash = password_hash($pass, PASSWORD_DEFAULT);
+//        $this->hash = Users::getOneWhere('login', $login)->hash;
+
     }
 
     public static function isAuth() {
@@ -32,9 +35,9 @@ class Users extends DbModel
 
     public static function auth($login, $pass) {
         $user = Users::getOneWhere('login', $login);
-        if (password_verify($pass, $user->name)) { //TODO сделать сравнение хеша.
-            $_SESSION['login'] = $login;
-            setcookie('login', $login, time()+180, '/');
+        if (password_verify($pass, $user->hash)) { //TODO сделать сравнение хеша.
+
+//            var_dump($_COOKIE);
             return true;
         } else {
             return false;

@@ -14,6 +14,10 @@ class AuthController extends Controller
         $pass = (new Request())->getParams()['pass'];
 
         if (Users::auth($login, $pass)) {
+            $user = Users::getOneWhere('login', $login);
+            $_SESSION['login'] = $user->login;
+            $_SESSION['hash_user'] = $user->hash;
+            setcookie('hash', $user->hash, time()+180, '/');
             header("Location: " . $_SERVER['HTTP_REFERER']);
         } else {
             Die("Не верный пароль!");
@@ -22,6 +26,7 @@ class AuthController extends Controller
 
     public function actionLogout() {
         session_regenerate_id();
+        setcookie('hash', '', -10, '/');
         header("Location: " . $_SERVER['HTTP_REFERER']);
         exit();
     }
