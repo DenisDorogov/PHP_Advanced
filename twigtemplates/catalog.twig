@@ -32,11 +32,9 @@
                             id: id
                         })
                     });
-                    console.log('Отправлен запрос');             //TODO удалить
                     const answer = await response.json();
                     document.getElementById('count').innerText = answer.count;
-                    console.log(answer);
-                }
+                    }
             )();
         })
     });

@@ -32,7 +32,7 @@
                     });
                     const answer = await response.json();
                     document.getElementById('count').innerText = answer.count;
-                    console.log(answer);
+                    document.getElementById(answer.id).remove();
                 }
             )();
         })

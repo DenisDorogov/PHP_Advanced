@@ -12,12 +12,7 @@ class BasketController extends Controller
 {
     public function actionIndex() {
         $session = session_id();
-//        $session = '07je2u80mgqsrtds58pk4a9dg39g7s1h'; //Заглушка
-
-//        debug(session_id(),'$session actionIndex');
         $basket = Basket::getBasket($session);
-//        debug($session ,'$basket actionIndex');
-//        debug($basket, '$basket');
 
         echo $this->render('basket', [
             'products' => $basket,
@@ -44,10 +39,13 @@ class BasketController extends Controller
     {
         $id = (new Request())->getParams()['id'];
         $basketDeleteElem = Basket::getOne($id);
-
+        var_dump($basketDeleteElem);
         if ($basketDeleteElem->session_id == session_id()) {
+            var_dump(session_id());
             $basketDeleteElem->delete();
         } else {
+            var_dump(session_id());
+            var_dump($basketDeleteElem->session_id);
             die('Попытка несанкционированного удаления');
         };
 

@@ -12,7 +12,6 @@ class AuthController extends Controller
     public function actionLogin() {
         $login = (new Request())->getParams()['login'];
         $pass = (new Request())->getParams()['pass'];
-//        $hesh = password_hash($pass, PASSWORD_BCRYPT);
 
         if (Users::auth($login, $pass)) {
             header("Location: " . $_SERVER['HTTP_REFERER']);
@@ -22,7 +21,7 @@ class AuthController extends Controller
     }
 
     public function actionLogout() {
-        session_destroy();
+        session_regenerate_id();
         header("Location: " . $_SERVER['HTTP_REFERER']);
         exit();
     }
