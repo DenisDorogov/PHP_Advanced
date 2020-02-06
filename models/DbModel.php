@@ -89,7 +89,7 @@ abstract class DbModel extends Model
     }
 
     public function delete() {
-        echo 'Сработал delete';
+//        echo 'Сработал delete';
         $tableName = static::getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
         return Db::getInstance()->execute($sql, ['id' => $this->id]);
