@@ -1,8 +1,8 @@
 <?php
 
-namespace app\models;
+namespace app\models\entities;
 
-class Products extends DbModel {
+class Products extends Model {
     protected $id;
     protected $name;
     protected $description;
@@ -17,7 +17,8 @@ class Products extends DbModel {
         'category' => false
     ];
 
-    public function __construct(
+    public function __construct
+    (
         $id = null,
         $name = null,
         $description = null,
@@ -31,18 +32,13 @@ class Products extends DbModel {
         $this->price = $price;
         $this->img = $img;
         $this->category = $category;
-
-//        $this->id = $id;
-//        $this->props['name'] = [$name, false];
-//        $this->props['description'] = [$description, false];
-//        $this->props['price'] = [$price, false];
     }
 
 
-    public static function getTableName()
-    {
-        return "products";
-    }
+//    public static function getTableName()
+//    {
+//        return "products";
+//    }
 
 
 }

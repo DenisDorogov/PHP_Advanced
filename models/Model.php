@@ -3,10 +3,7 @@
 
 namespace app\models;
 
-
-use app\interfaces\IModel;
-
-abstract class Model implements IModel
+abstract class Model
 {
 
     public function __set($name, $value)
@@ -16,6 +13,7 @@ abstract class Model implements IModel
 
     }
     public function __get($name) {
+        //TODO сделать if (property_exists())
         return $this->$name;
     }
 
