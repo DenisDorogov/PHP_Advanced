@@ -13,18 +13,30 @@ class BasketController extends Controller
 {
     public function actionIndex() {
         $session = session_id();
-//        if ($_SESSION[hash]$user->hash))
-        $basket = Basket::getBasket($session);
-        echo $this->render('basket', [
-            'products' => $basket,
-            'IMG_PATH_MIN' => '/img/min/'
-            ,'count' => count($basket)
-        ]);
+//        if (!($_COOKIE['login'] == null && $_COOKIE['login'] == 'deleted')) {
+            $basket = Basket::getBasket($session);
+            echo $this->render('basket', [
+                'products' => $basket,
+                'IMG_PATH_MIN' => '/img/min/'
+                ,'count' => count($basket)
+            ]);
+//        } else {
+//            $user = $_SESSION['id'];
+//            $basket = Basket::getBasket($session, $user);
+//            echo $this->render('basket', [
+//                'products' => $basket,
+//                'IMG_PATH_MIN' => '/img/min/'
+//                ,'count' => count($basket)
+//            ]);
+//        }
+
     }
 
     public function actionAddToBasket() {
         $id = (new Request())->getParams()['id'];
-        (new Basket(session_id(), $id))->save();
+        $user_id = $_SESSION['id'];
+//        debug($user_id,'$user_id');
+        (new Basket(session_id(), $id, $user_id))->save();
         header('Content-Type: application/json');
         echo json_encode(['status' => 'ok', 'count' => Basket::getCountWhere('session_id', session_id())]);
 //        echo $this->render('basket', [

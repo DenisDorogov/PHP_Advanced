@@ -26,7 +26,6 @@ class Users extends DbModel
     }
 
     public static function isAuth() {
-        var_dump(isset($_SESSION['login']));
         return isset($_SESSION['login']);
     }
 
@@ -37,8 +36,6 @@ class Users extends DbModel
     public static function auth($login, $pass) {
         $user = Users::getOneWhere('login', $login);
         if (password_verify($pass, $user->hash)) { //TODO сделать сравнение хеша.
-
-//            var_dump($_COOKIE);
             return true;
         } else {
             return false;

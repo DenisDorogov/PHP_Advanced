@@ -47,8 +47,7 @@ try {
 //$product->props['id'] = 8;
 //$product->save();
 //$product->delete();
-
-//debug($product, '$product');
+//debug(session_id(), 'session_id');
 
 
 

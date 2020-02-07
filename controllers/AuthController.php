@@ -17,7 +17,9 @@ class AuthController extends Controller
         if (Users::auth($login, $pass)) {
             $user = Users::getOneWhere('login', $login);
             $_SESSION['login'] = $user->login;
-            $_SESSION['hash_user'] = $user->hash;
+            $_SESSION['id'] = $user->id;
+//            debug($_SESSION, '$_SESSION');
+            setcookie('login', $user->login, time()+180, '/');
             setcookie('hash', $user->hash, time()+180, '/');
             header("Location: " . $_SERVER['HTTP_REFERER']);
         } else {
@@ -27,6 +29,8 @@ class AuthController extends Controller
 
     public function actionLogout() {
         session_regenerate_id();
+        session_destroy();
+        setcookie('login', '', -10, '/');
         setcookie('hash', '', -10, '/');
         $this->renderTemplate('menu', [
             'count' => 0,
