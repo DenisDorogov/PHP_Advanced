@@ -8,12 +8,14 @@ use app\engine\Request;
 use app\models\Basket;
 use app\models\Products;
 use app\models\Users;
+use app\models\repositories\BasketRepository;
+
 
 class BasketController extends Controller
 {
     public function actionIndex() {
         $session = session_id();
-            $basket = Basket::getBasket($session);
+            $basket = (new BasketRepository())->getBasket($session);
             echo $this->render('basket', [
                 'products' => $basket,
                 'IMG_PATH_MIN' => '/img/min/'

@@ -7,6 +7,7 @@ namespace app\controllers;
 use app\engine\Request;
 use app\models\Basket;
 use app\models\Users;
+use app\models\repositories\UserRepository;
 
 class AuthController extends Controller
 {
@@ -14,8 +15,8 @@ class AuthController extends Controller
         $login = (new Request())->getParams()['login'];
         $pass = (new Request())->getParams()['pass'];
 
-        if (Users::auth($login, $pass)) {
-            $user = Users::getOneWhere('login', $login);
+        if ((new UserRepository())->auth($login, $pass)) {
+            $user = (new UserRepository())->getOneWhere('login', $login);
             $_SESSION['login'] = $user->login;
             $_SESSION['id'] = $user->id;
 //            debug($_SESSION, '$_SESSION');

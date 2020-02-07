@@ -5,15 +5,23 @@ session_start();
 include realpath("../config/config.php");
 include realpath("../engine/Autoload.php");
 
-use app\models\{Products, Users, Basket};
-use app\engine\{Autoload, Db, Render, TwigRender, Request};
+use app\models\entities\{Products, Users, Basket};
+use app\engine\Autoload;
+use app\engine\TwigRender;
+use app\engine\Request;
+use app\models\repositories\ProductsRepository;
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 include realpath("../vendor/Autoload.php");
 
-//$user = Users::getOneWhere('login', 'admin');
-//var_dump($user);
 
+$product = (new ProductsRepository())->getOne(13);
+$product->price = 5;
+(new ProductsRepository())->save($product);
+$product = (new ProductsRepository())->getOne(13);
+var_dump($product);
+
+die();
 try {
     $request = new Request();
 

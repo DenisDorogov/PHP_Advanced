@@ -19,7 +19,7 @@ class BasketRepository extends Repository
         return Basket::class;
     }
 
-    public static function getTableName()
+    public function getTableName()
     {
         return "basket";
     }

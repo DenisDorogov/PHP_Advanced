@@ -7,15 +7,15 @@ use app\models\Repository;
 
 class UsersRepository extends Repository
 {
-        public static function isAuth() {
+        public function isAuth() {
         return isset($_SESSION['login']);
     }
 
-    public static function getName() {
+    public function getName() {
         return $_SESSION['login'];
     }
 
-    public static function auth($login, $pass) {
+    public function auth($login, $pass) {
         $user = Users::getOneWhere('login', $login);
         if (password_verify($pass, $user->hash)) {
             return true;
@@ -29,7 +29,7 @@ class UsersRepository extends Repository
         return Users::class;
     }
 
-    public static function getTableName()
+    public function getTableName()
     {
         return "users";
     }
