@@ -29,7 +29,7 @@ include realpath("../vendor/Autoload.php");
 //$product = (new ProductsRepository())->getOne(13);
 
 
-die();
+
 try {
     $request = new Request();
 

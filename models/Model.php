@@ -4,12 +4,9 @@ namespace app\models;
 abstract class Model
 {
 
-//    private $props;
-
     public function __set($name, $value)
     {
 //        $this->$name = $value;
-        debug($name, 'Debug-Model-set');
 //        if (property_exists($this, $name)) {
 //            $this->props[$name][1] = true;
 //            $this->props[$name][0] = $value;
