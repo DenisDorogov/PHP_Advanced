@@ -44,47 +44,47 @@ abstract class Repository implements IModel
     public function insert(Model $entity) {
         $params = [];
         $columns = [];
-        foreach ($entity as $key=>$value) {
-                if ($key == 'props') continue;
-                $params[":{$key}"] = $value;
-                $columns[] = "`$key`";
+        foreach ($entity->props as $key=>$value) {
+                if ($key !== 'props') {
+                    $params[":{$key}"] = $value[0];
+                    $columns[] = "`$key`";
+                }
+
         }
         $columns = implode(", ", $columns); 
         $values = implode(", ", array_keys($params));
         $tableName = $this->getTableName();
-
         $sql = "INSERT INTO `{$tableName}`({$columns}) VALUES ({$values})";
         Db::getInstance()->execute($sql, $params);
-        $tableName->id = Db::getInstance()->lastInsertId();
+        $entity->props['id'] = Db::getInstance()->lastInsertId();
+
     }
 
     public function update(Model $entity)
     {
         $params = [];
         $colums = [];
-        foreach ($entity as $key => $value) {
-            if (!$value) continue;
-            $params[":{$key}"] = $entity->key;
+        foreach ($entity->props as $key => $value) {
+            if (!$value[1]) continue;
+            $params[":{$key}"] = $entity->props[$key][0];
             $colums[] .= "`" . $key . "` = :" . $key;
             $entity->key = false;
         }
         $colums = implode(", ", $colums);
-        $params[':id'] = $entity->id;
+        $params[':id'] = $entity->props['id'][0];
         $tableName = $this->getTableName();
         $sql = "UPDATE `{$tableName}` SET {$colums} WHERE `id` = :id";
         Db::getInstance()->execute($sql, $params);
     }
 
     public function save(Model $entity) {
-        if (is_null($entity->id))
+        if (is_null($entity->props['id']))
         {
+            echo ('Запуск insert');
             $this->insert($entity);
         } else {
-            if ($this->getOne($entity->id)) {
+            echo ('Запуск update');
                 $this->update($entity);
-            } else {
-                $this->insert($entity);
-            }
         }
 
     }
@@ -93,7 +93,7 @@ abstract class Repository implements IModel
     {
         $tableName = $this->getTableName();
         $sql = "DELETE FROM {$tableName} WHERE id = :id";
-        return Db::getInstance()->execute($sql, ['id' => $entity->id]);
+        return Db::getInstance()->execute($sql, ['id' => $entity->props['id'][0]]);
     }
 
 //    abstract public function getTableName();

@@ -5,18 +5,18 @@ namespace app\models\entities;
 use app\models\Model;
 
 class Products extends Model {
-    protected $id;
-    protected $name;
-    protected $description;
-    protected $price;
-    protected $img;
-    protected $category;
+//    protected $id;
+//    protected $name;
+//    protected $description;
+//    protected $price;
+//    protected $img;
+//    protected $category;
     protected $props = [
-        'name' => false,
-        'description' => false,
-        'price' => false,
-        'img' => false,
-        'category' => false
+        'name' => [null, false],
+        'description' => [null, false],
+        'price' => [null, false],
+        'img' => ["NoPhoto.jpg", false],
+        'category' => [null, false]
     ];
 
     public function __construct
@@ -29,18 +29,20 @@ class Products extends Model {
         $category = null
     )
     {
-        $this->name = $name;
-        $this->description = $description;
-        $this->price = $price;
-        $this->img = $img;
-        $this->category = $category;
+        $this->props['name'] = [$name, false];
+        $this->props['description'] = [$description, false];
+        $this->props['price'] = [$price, false];
+        $this->props['img'] = [$img, false];
+        $this->props['category'] = [$category, false];
     }
 
-
-//    public static function getTableName()
-//    {
-//        return "products";
-//    }
-
-
+    public function __set($name, $value)
+    {
+        if ($this->props[$name][0] === null) {
+            $this->props[$name][1] = false;
+        } else {
+            $this->props[$name][1] = true;
+        }
+        $this->props[$name][0] = $value;
+    }
 }

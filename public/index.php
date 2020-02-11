@@ -6,20 +6,28 @@ include realpath("../config/config.php");
 include realpath("../engine/Autoload.php");
 
 use app\models\entities\{Products, Users, Basket};
-use app\engine\Autoload;
-use app\engine\TwigRender;
-use app\engine\Request;
+//use app\engine\Autoload;
+//use app\engine\TwigRender;
+//use app\engine\Request;
+use app\engine\{Request, TwigRender, Autoload};
 use app\models\repositories\ProductsRepository;
 
 spl_autoload_register([new Autoload(), 'loadClass']);
 include realpath("../vendor/Autoload.php");
 
 
-$product = (new ProductsRepository())->getOne(13);
-$product->price = 5;
-(new ProductsRepository())->save($product);
-$product = (new ProductsRepository())->getOne(13);
-var_dump($product);
+//$product = (new ProductsRepository())->getOne(40);
+//$product->name = 'Продукт update';
+//debug($product, 'index.php $product');
+
+//$product = new Products('', 'Продукт','добавленный', 222);
+//debug($product, 'index.php $product');
+//var_dump(get_class_methods($product));
+//(new ProductsRepository())->delete($product);
+
+//(new ProductsRepository())->insert($product);
+//$product = (new ProductsRepository())->getOne(13);
+
 
 die();
 try {
