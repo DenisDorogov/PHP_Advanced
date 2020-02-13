@@ -31,10 +31,10 @@ class BasketController extends Controller
     public function actionAddToBasket() {
         $id = (new Request())->getParams()['id'];
         $user_id = $_SESSION['id'];
-        $basket = new Basket(session_id(), $id, $user_id);
-//        debug($basket, '$basket actionAddToBasket()');
 
-        (new BasketRepository())->save($basket);
+        $basket = new Basket(null, session_id(), $id, $user_id);
+//        debug($basket, '$basket');
+        (new BasketRepository())->insert($basket);
         header('Content-Type: application/json');
         echo json_encode(['status' => 'ok', 'user_id' => $_SESSION['id'] , 'count' => (new BasketRepository())->getCountWhere('session_id', session_id())]);
     }
@@ -43,13 +43,6 @@ class BasketController extends Controller
     {
         $id = (int)(new Request())->getParams()['id'];
         $basketDeleteElem = (new BasketRepository())->getOne($id);
-//        debug($basketDeleteElem, '$basketDeleteElem');
-//        debug($id, '$id');
-//        debug($_SESSION['login'], '$_SESSION[\'login\']');
-//        debug($_SESSION['id'], '$_SESSION[\'id\']');
-//        debug($basketDeleteElem->props['user_id'][0], '$basketDeleteElem->props[\'user_id\'][0]');
-//        die();
-
         if (isset($_SESSION['login']) && $_SESSION['id'] == $basketDeleteElem->props['user_id'][0]) {
             (new BasketRepository())->delete($basketDeleteElem);
         } elseif ($basketDeleteElem->props['session_id'][0] == session_id()) {

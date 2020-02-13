@@ -44,7 +44,7 @@ class AuthController extends Controller
     }
 
     public function actionLogout() {
-//        session_regenerate_id();
+        session_regenerate_id();
         session_destroy();
 //        setcookie('login', '', -10, '/');
         setcookie('hash', '', -10, '/');
