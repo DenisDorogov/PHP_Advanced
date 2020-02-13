@@ -10,7 +10,7 @@ abstract class Repository implements IModel
     public function getOneWhere($field, $value) {
         $tableName = $this->getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE `$field`=:value;";
-        return Db::getInstance()->queryObject($sql, ["value" => $value], getEntityClass());
+        return Db::getInstance()->queryObject($sql, ["value" => $value], $this->getEntityClass());
     }
 
     public function getCountWhere($field, $value)
@@ -80,10 +80,8 @@ abstract class Repository implements IModel
     public function save(Model $entity) {
         if (is_null($entity->props['id']))
         {
-            echo ('Запуск insert');
             $this->insert($entity);
         } else {
-            echo ('Запуск update');
                 $this->update($entity);
         }
 

@@ -6,21 +6,18 @@ use app\models\Model;
 
 class Basket extends Model
 {
-    protected $id;
-    protected $session_id;
-    protected $product_id;
-    protected $user_id;
-
     protected $props = [
-        'session_id' => false,
-        'product_id' => false,
-        'user_id' => false
+        'id' => [null, false],
+        'session_id' => [null, false],
+        'product_id' => [null, false],
+        'user_id' => [null, false]
     ];
 
-    public function __construct($session_id = null, $product_id = null, $user_id = null)
+    public function __construct($id = null, $session_id = null, $product_id = null, $user_id = null)
     {
-        $this->session_id = $session_id;
-        $this->product_id = $product_id;
-        $this->user_id = $user_id;
+        $this->props['id'] = [$id, false];
+        $this->props['session_id'] = [$session_id, false];
+        $this->props['product_id'] = [$product_id, false];
+        $this->props['user_id'] = [$user_id, false];
     }
 }
