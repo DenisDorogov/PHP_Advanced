@@ -20,4 +20,8 @@ class Basket extends Model
         $this->props['product_id'] = [$product_id, false];
         $this->props['user_id'] = [$user_id, false];
     }
+    public function __set($name, $value)
+    {
+        $this->props[$name] = [$value, false];
+    }
 }

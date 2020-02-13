@@ -19,13 +19,13 @@ class AuthController extends Controller
             $user = (new UsersRepository())->getOneWhere('login', $login);
             if (isset((new Request())->getParams()['save'])) {
                 $hash = uniqid(rand(), true);
-                debug(get_class_methods($user), '$user');
+//                debug(get_class_methods($user), '$user');
 
                 $user->props['cookie_hash'] = [$hash, true];
 //                $user->props['cookie_hash'][1] = true;
-                debug($user, '$user');
+//                debug($user, '$user');
 //                debug(get_class_methods($user), '$user->props[\'cookie_hash\'][0]');
-                die();
+//                die();
 //                $id = (int)$_SESSION['id'];
                 (new UsersRepository())->update($user);
 //                $sql = "UPDATE `users` SET `hash` = '{$hash}' WHERE `users`.`id` = {$id}";

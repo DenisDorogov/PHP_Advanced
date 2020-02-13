@@ -9,6 +9,13 @@ use app\models\Repository;
 class UsersRepository extends Repository
 {
         public function isAuth() {
+            if (isset($_COOKIE["hash"]) && !isset($_SESSION['login'])) {
+                $hash = $_COOKIE['hash'];
+                $user = (new UsersRepository())->getOneWhere('cookie_hash', '$hash');
+                if (!empty($user)) {
+                    $_SESSION['login'] = $user['login'];
+                }
+            }
         return isset($_SESSION['login']);
     }
 

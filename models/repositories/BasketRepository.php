@@ -14,6 +14,12 @@ class BasketRepository extends Repository
         return Db::getInstance()->queryAll($sql, ['session' => $session]);
     }
 
+    public static function getBasketUser($idUser)
+    {
+        $sql = "SELECT p.id id_prod, b.id id_basket, p.name, p.description, p.price, p.img FROM basket b, products p WHERE b.product_id=p.id AND user_id = :user";
+        return Db::getInstance()->queryAll($sql, ['user' => $idUser]);
+    }
+
     public function getEntityClass()
     {
         return Basket::class;
