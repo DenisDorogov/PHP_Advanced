@@ -19,6 +19,8 @@ class UsersRepository extends Repository
     public function auth($login, $pass) {
         $user = (new UsersRepository())->getOneWhere('login', $login);
         if (password_verify($pass, $user->props['hash'][0])) {
+            $_SESSION['login'] = $user->props['login'][0];
+            $_SESSION['id'] = $user->props['id'][0];
             return true;
         } else {
             return false;
