@@ -1,20 +1,21 @@
 <h2>Корзина</h2>
 {% for item in products %}
-    <div id="{{item.id_basket}}">
+    <div id="{{ item.id_basket }}">
         <img src="{{ IMG_PATH_MIN }}{{ item.img }}" alt="{{ item.name }}">
         <h4>{{ item.name }}</h4>
         <p>Описание: {{ item.description }}</p>
         <p>Цена:{{ item.price }}</p>
-        <button data-id="{{item.id_basket}}" class="delete">Удалить</button>
+        <button data-id="{{ item.id_basket }}" class="delete">Удалить</button>
         <hr>
     </div>
 
 
 {% endfor %}
 
-    <br>
+<br>
+<a href="/orders/createOrder/">Оформить заказ</a>
 
-    <script>
+<script>
     let buttons = document.querySelectorAll('.delete');
     buttons.forEach((elem) => {
         elem.addEventListener('click', () => {
@@ -37,6 +38,4 @@
             )();
         })
     });
-
-    //TODO реализовать удаление из корзины асинхпронно (javascript remove) 0:52
 </script>

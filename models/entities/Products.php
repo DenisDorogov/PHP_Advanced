@@ -5,12 +5,7 @@ namespace app\models\entities;
 use app\models\Model;
 
 class Products extends Model {
-//    protected $id;
-//    protected $name;
-//    protected $description;
-//    protected $price;
-//    protected $img;
-//    protected $category;
+
     protected $props = [
         'name' => [null, false],
         'description' => [null, false],

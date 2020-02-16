@@ -1,0 +1,15 @@
+<h2>Оформление заказа</h2>
+{% for item in products %}
+    <div id="{{ item.id_basket }}">
+        <img src="{{ IMG_PATH_MIN }}{{ item.img }}" alt="{{ item.name }}">
+        <h4>{{ item.name }}</h4>
+        <p>Описание: {{ item.description }}</p>
+        <p>Цена:{{ item.price }}</p>
+        <button data-id="{{ item.id_basket }}" class="delete">Удалить</button>
+        <hr>
+    </div>
+{% endfor %}
+<form action="/orders/createOrder/">
+    <label for="email">Введите e-mail</label>
+    <input type="email" name="email">
+</form>
