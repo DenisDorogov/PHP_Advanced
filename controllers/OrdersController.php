@@ -25,16 +25,17 @@ class OrdersController extends Controller
         ]);
     }
 
-        public function addToOrder() {
-            $user_id = $_SESSION['id'];
-            $order = new Orders(null, session_id(), $id, $user_id);
+    public function addToOrder()
+    {
+//        debug($_POST['email'], 'POST: email');
+        $user_id = $_SESSION['id'];
+        $eMail = (new Request())->getParams()['email'];
+        $order = new Orders(null, $user_id, $eMail);
+        (new OrdersRepository())->insert($order);
 
-
-//            $id = (new Request())->getParams()['id'];
-//            $basket = new Basket(null, session_id(), $id, $user_id);
-//            (new BasketRepository())->insert($basket);
 //            header('Content-Type: application/json');
 //            echo json_encode(['status' => 'ok', 'user_id' => $_SESSION['id'] , 'count' => (new BasketRepository())->getCountWhere('session_id', session_id())]);
 
-        }
+    }
+    
 }
